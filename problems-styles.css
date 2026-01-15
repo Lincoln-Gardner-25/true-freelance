@@ -1,0 +1,316 @@
+/* ================================
+   Problem Identification Page Styles
+   ================================ */
+
+/* Full-screen scroll snap container */
+.problems-body {
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory;
+    height: 100vh;
+}
+
+/* ================================
+   Header with Blacksmith Background
+   ================================ */
+
+.problems-header {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-image: url('https://images.unsplash.com/photo-1517457373958-b7bdd4587205?ixlib=rb-4.0.3&auto=format&fit=crop&w=2069&q=80');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    scroll-snap-align: start;
+}
+
+.problems-header-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.5) 0%,
+        rgba(0, 0, 0, 0.7) 100%
+    );
+}
+
+.problems-header-content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: var(--spacing-xl);
+    max-width: 800px;
+}
+
+.problems-header-title {
+    font-size: 56px;
+    font-weight: var(--font-weight-semibold);
+    color: #ffffff;
+    text-shadow: 2px 2px 12px rgba(0, 0, 0, 0.6);
+    letter-spacing: 2px;
+    margin-bottom: var(--spacing-lg);
+}
+
+.problems-header-subtitle {
+    font-size: var(--font-size-lg);
+    color: rgba(255, 255, 255, 0.9);
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
+    margin-bottom: var(--spacing-2xl);
+}
+
+.problems-back-btn {
+    background-color: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    color: #ffffff;
+    backdrop-filter: blur(4px);
+}
+
+.problems-back-btn:hover {
+    background-color: rgba(255, 255, 255, 0.25);
+    border-color: rgba(255, 255, 255, 0.6);
+}
+
+.pain-point-content .problems-back-btn {
+    margin-top: var(--spacing-2xl);
+}
+
+/* Scroll Indicator */
+.scroll-indicator {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.8);
+    animation: bounce 2s infinite;
+}
+
+.scroll-indicator span {
+    display: block;
+    font-size: var(--font-size-sm);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: var(--spacing-sm);
+}
+
+.scroll-arrow {
+    font-size: 24px;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateX(-50%) translateY(0);
+    }
+    40% {
+        transform: translateX(-50%) translateY(-10px);
+    }
+    60% {
+        transform: translateX(-50%) translateY(-5px);
+    }
+}
+
+/* ================================
+   Pain Point Sections
+   ================================ */
+
+.problems-main {
+    scroll-snap-type: y mandatory;
+}
+
+.pain-point-section {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    scroll-snap-align: start;
+    overflow: hidden;
+}
+
+/* Background Image Layer */
+.pain-point-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    filter: blur(3px);
+    transform: scale(1.05);
+}
+
+/* Hazy Overlay */
+.pain-point-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        135deg,
+        rgba(0, 0, 0, 0.6) 0%,
+        rgba(0, 0, 0, 0.4) 50%,
+        rgba(0, 0, 0, 0.6) 100%
+    );
+    backdrop-filter: blur(2px);
+}
+
+/* Content */
+.pain-point-content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: var(--spacing-2xl);
+    max-width: 900px;
+}
+
+.pain-point-number {
+    display: inline-block;
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    color: rgba(255, 255, 255, 0.9);
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    padding: var(--spacing-sm) var(--spacing-xl);
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    border-radius: 50px;
+    margin-bottom: var(--spacing-xl);
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(4px);
+}
+
+.pain-point-title {
+    font-size: 48px;
+    font-weight: var(--font-weight-semibold);
+    color: #ffffff;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+    margin-bottom: var(--spacing-xl);
+    line-height: 1.2;
+}
+
+.pain-point-description {
+    font-size: 24px;
+    color: rgba(255, 255, 255, 0.95);
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+    line-height: 1.6;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+/* ================================
+   Section-specific color accents
+   ================================ */
+
+/* Pain Point 1 - Pricing (warm gold tones) */
+#pain-point-1 .pain-point-overlay {
+    background: linear-gradient(
+        135deg,
+        rgba(120, 80, 0, 0.5) 0%,
+        rgba(0, 0, 0, 0.5) 50%,
+        rgba(120, 80, 0, 0.4) 100%
+    );
+}
+
+/* Pain Point 2 - Calories (green health tones) */
+#pain-point-2 .pain-point-overlay {
+    background: linear-gradient(
+        135deg,
+        rgba(0, 80, 40, 0.5) 0%,
+        rgba(0, 0, 0, 0.5) 50%,
+        rgba(0, 80, 40, 0.4) 100%
+    );
+}
+
+/* Pain Point 3 - Inner Peace (purple calm tones) */
+#pain-point-3 .pain-point-overlay {
+    background: linear-gradient(
+        135deg,
+        rgba(80, 40, 120, 0.5) 0%,
+        rgba(0, 0, 0, 0.5) 50%,
+        rgba(80, 40, 120, 0.4) 100%
+    );
+}
+
+/* Pain Point 4 - Education (blue knowledge tones) */
+#pain-point-4 .pain-point-overlay {
+    background: linear-gradient(
+        135deg,
+        rgba(0, 60, 120, 0.5) 0%,
+        rgba(0, 0, 0, 0.5) 50%,
+        rgba(0, 60, 120, 0.4) 100%
+    );
+}
+
+/* Pain Point 5 - Communication (warm pink/red tones) */
+#pain-point-5 .pain-point-overlay {
+    background: linear-gradient(
+        135deg,
+        rgba(150, 50, 80, 0.5) 0%,
+        rgba(0, 0, 0, 0.5) 50%,
+        rgba(150, 50, 80, 0.4) 100%
+    );
+}
+
+/* ================================
+   Responsive Design
+   ================================ */
+
+@media (max-width: 767px) {
+    .problems-header-title {
+        font-size: 36px;
+    }
+
+    .problems-header-subtitle {
+        font-size: var(--font-size-base);
+    }
+
+    .pain-point-title {
+        font-size: 28px;
+    }
+
+    .pain-point-description {
+        font-size: 18px;
+    }
+
+    .pain-point-number {
+        font-size: 12px;
+        letter-spacing: 2px;
+    }
+
+    .pain-point-content {
+        padding: var(--spacing-xl);
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+    .problems-header-title {
+        font-size: 48px;
+    }
+
+    .pain-point-title {
+        font-size: 40px;
+    }
+
+    .pain-point-description {
+        font-size: 22px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .pain-point-title {
+        font-size: 56px;
+    }
+
+    .pain-point-description {
+        font-size: 26px;
+    }
+}

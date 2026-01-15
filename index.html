@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="True Freelance - Track your freelance projects and calculate hourly rates">
+    <title>True Freelance - Track Your Projects</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <h1 class="header-title">True Freelance</h1>
+            <div class="header-actions">
+                <a href="about.html" class="btn btn-secondary">About Me</a>
+                <a href="problems.html" class="btn btn-secondary">Problem Identification</a>
+                <button id="addProjectBtn" class="btn btn-primary">
+                    <span class="btn-icon">+</span>
+                    Add Project
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            <!-- Tab Navigation -->
+            <nav class="tabs">
+                <button class="tab-btn active" data-tab="projects">All Projects</button>
+                <button class="tab-btn" data-tab="monthly">Monthly Tracking</button>
+            </nav>
+
+            <!-- Projects Tab -->
+            <div id="projectsTab" class="tab-content active">
+                <!-- Empty State (shown when no projects exist) -->
+                <div id="emptyState" class="empty-state">
+                <svg class="empty-state-icon" width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="60" cy="60" r="50" stroke="currentColor" stroke-width="3" stroke-dasharray="8 8"/>
+                    <path d="M60 35V85M35 60H85" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+                </svg>
+                <h2 class="empty-state-title">No projects yet</h2>
+                <p class="empty-state-text">Add your first project to start tracking your hourly rate</p>
+                <button id="emptyStateBtn" class="btn btn-primary">
+                    <span class="btn-icon">+</span>
+                    Add Project
+                </button>
+            </div>
+
+                <!-- Projects List -->
+                <div id="projectsList" class="projects-list">
+                    <!-- Project cards will be dynamically inserted here -->
+                </div>
+            </div>
+
+            <!-- Monthly Tab -->
+            <div id="monthlyTab" class="tab-content">
+                <div class="monthly-view">
+                    <div class="monthly-header">
+                        <button id="prevMonth" class="btn-month" aria-label="Previous month">&larr;</button>
+                        <h2 id="currentMonth" class="monthly-title">January 2026</h2>
+                        <button id="nextMonth" class="btn-month" aria-label="Next month">&rarr;</button>
+                    </div>
+
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-label">Total Earnings</div>
+                            <div class="stat-value" id="monthlyEarnings">$0.00</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">Total Hours</div>
+                            <div class="stat-value" id="monthlyHours">0.00</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">Average Rate</div>
+                            <div class="stat-value stat-success" id="monthlyRate">$0.00/hr</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">Projects Completed</div>
+                            <div class="stat-value" id="monthlyProjects">0</div>
+                        </div>
+                    </div>
+
+                    <div id="monthlyProjectsList" class="monthly-projects">
+                        <!-- Monthly projects will be listed here -->
+                    </div>
+
+                    <div id="monthlyEmpty" class="empty-state hidden">
+                        <svg class="empty-state-icon" width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="60" cy="60" r="50" stroke="currentColor" stroke-width="3" stroke-dasharray="8 8"/>
+                            <path d="M40 60h40M60 40v40" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+                        </svg>
+                        <h2 class="empty-state-title">No projects this month</h2>
+                        <p class="empty-state-text">Projects you complete this month will appear here</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal Overlay -->
+    <div id="modalOverlay" class="modal-overlay hidden">
+        <div class="modal">
+            <div class="modal-header">
+                <h2 id="modalTitle" class="modal-title">Add Project</h2>
+                <button id="closeModal" class="btn-close" aria-label="Close modal">
+                    <span>&times;</span>
+                </button>
+            </div>
+
+            <form id="projectForm" class="project-form">
+                <div class="form-group">
+                    <label for="projectName" class="form-label">Project Name</label>
+                    <input
+                        type="text"
+                        id="projectName"
+                        class="form-input"
+                        placeholder="e.g., Website Redesign"
+                        required
+                        maxlength="100"
+                    >
+                    <span class="form-error" id="nameError"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="hoursWorked" class="form-label">Hours Worked</label>
+                    <input
+                        type="number"
+                        id="hoursWorked"
+                        class="form-input"
+                        placeholder="e.g., 20"
+                        step="0.01"
+                        min="0"
+                        required
+                    >
+                    <span class="form-error" id="hoursError"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="moneyReceived" class="form-label">Money Received ($)</label>
+                    <input
+                        type="number"
+                        id="moneyReceived"
+                        class="form-input"
+                        placeholder="e.g., 1000"
+                        step="0.01"
+                        min="0"
+                        required
+                    >
+                    <span class="form-error" id="moneyError"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="completionDate" class="form-label">Completion Date</label>
+                    <input
+                        type="date"
+                        id="completionDate"
+                        class="form-input"
+                        required
+                    >
+                    <span class="form-error" id="dateError"></span>
+                </div>
+
+                <div class="modal-actions">
+                    <button type="button" id="cancelBtn" class="btn btn-secondary">Cancel</button>
+                    <button type="submit" id="saveBtn" class="btn btn-primary">Save Project</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
