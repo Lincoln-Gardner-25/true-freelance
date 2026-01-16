@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="True Freelance - Enter">
+    <title>True Freelance - Enter</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Cormorant+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="door-styles.css">
+</head>
+<body>
+    <!-- Subtle Leaf Background handled in CSS -->
+
+    <main class="door-main">
+        <h1 class="door-title">Welcome</h1>
+        <p class="door-subtitle">Step through to begin your journey</p>
+
+        <!-- Door Container -->
+        <div class="door-container" id="doorContainer">
+            <!-- Door Frame -->
+            <div class="door-frame">
+                <!-- The Door -->
+                <div class="door" id="door">
+                    <!-- Door Panels -->
+                    <div class="door-panel door-panel-top-left"></div>
+                    <div class="door-panel door-panel-top-right"></div>
+                    <div class="door-panel door-panel-bottom-left"></div>
+                    <div class="door-panel door-panel-bottom-right"></div>
+
+                    <!-- Door Handle -->
+                    <div class="door-handle"></div>
+
+                    <!-- Crack Light (visible on hover) -->
+                    <div class="door-crack"></div>
+                </div>
+
+                <!-- Light behind door (visible when opening) -->
+                <div class="door-light"></div>
+            </div>
+        </div>
+
+        <p class="door-hint">Click the door to enter</p>
+    </main>
+
+    <script>
+        const door = document.getElementById('door');
+        const doorContainer = document.getElementById('doorContainer');
+
+        door.addEventListener('click', function() {
+            // Add opening class for full open animation
+            doorContainer.classList.add('door-opening');
+
+            // Redirect after animation completes
+            setTimeout(function() {
+                window.location.href = 'timer.html';
+            }, 1200);
+        });
+    </script>
+</body>
+</html>

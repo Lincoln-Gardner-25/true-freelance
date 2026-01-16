@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="True Freelance - Timer">
+    <title>True Freelance - On the Clock</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Cormorant+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="timer-styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="timer-header">
+        <h1 class="timer-title">You're on the clock <span class="wink">;)</span></h1>
+    </header>
+
+    <!-- Main Content -->
+    <main class="timer-main">
+        <div class="timer-container">
+            <!-- Timer Display -->
+            <div class="timer-display">
+                <span class="timer-hours" id="hours">00</span>
+                <span class="timer-separator">:</span>
+                <span class="timer-minutes" id="minutes">00</span>
+                <span class="timer-separator">:</span>
+                <span class="timer-seconds" id="seconds">00</span>
+            </div>
+
+            <!-- Timer Controls -->
+            <div class="timer-controls">
+                <button class="btn-timer btn-start" id="startBtn">Start</button>
+                <button class="btn-timer btn-pause" id="pauseBtn" disabled>Pause</button>
+                <button class="btn-timer btn-reset" id="resetBtn">Reset</button>
+            </div>
+        </div>
+
+        <!-- Navigation to App -->
+        <div class="timer-nav">
+            <a href="index.html" class="btn-enter-app">
+                Enter True Freelance
+                <span class="arrow">&rarr;</span>
+            </a>
+        </div>
+    </main>
+
+    <script>
+        let timerInterval = null;
+        let totalSeconds = 0;
+        let isRunning = false;
+
+        const hoursDisplay = document.getElementById('hours');
+        const minutesDisplay = document.getElementById('minutes');
+        const secondsDisplay = document.getElementById('seconds');
+        const startBtn = document.getElementById('startBtn');
+        const pauseBtn = document.getElementById('pauseBtn');
+        const resetBtn = document.getElementById('resetBtn');
+
+        function updateDisplay() {
+            const hours = Math.floor(totalSeconds / 3600);
+            const minutes = Math.floor((totalSeconds % 3600) / 60);
+            const seconds = totalSeconds % 60;
+
+            hoursDisplay.textContent = hours.toString().padStart(2, '0');
+            minutesDisplay.textContent = minutes.toString().padStart(2, '0');
+            secondsDisplay.textContent = seconds.toString().padStart(2, '0');
+        }
+
+        function startTimer() {
+            if (!isRunning) {
+                isRunning = true;
+                startBtn.disabled = true;
+                pauseBtn.disabled = false;
+
+                timerInterval = setInterval(function() {
+                    totalSeconds++;
+                    updateDisplay();
+                }, 1000);
+            }
+        }
+
+        function pauseTimer() {
+            if (isRunning) {
+                isRunning = false;
+                clearInterval(timerInterval);
+                startBtn.disabled = false;
+                pauseBtn.disabled = true;
+                startBtn.textContent = 'Resume';
+            }
+        }
+
+        function resetTimer() {
+            isRunning = false;
+            clearInterval(timerInterval);
+            totalSeconds = 0;
+            updateDisplay();
+            startBtn.disabled = false;
+            pauseBtn.disabled = true;
+            startBtn.textContent = 'Start';
+        }
+
+        startBtn.addEventListener('click', startTimer);
+        pauseBtn.addEventListener('click', pauseTimer);
+        resetBtn.addEventListener('click', resetTimer);
+
+        // Auto-start the timer when page loads
+        window.addEventListener('load', function() {
+            setTimeout(startTimer, 500);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,384 @@
+/* ================================
+   Door Page Styles - Vintage Theme
+   ================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* Vintage Color Palette */
+    --cream: #F5F1E8;
+    --cream-dark: #EDE8DC;
+    --olive: #5C6B4A;
+    --olive-dark: #4A5A3A;
+    --olive-light: #7A8B68;
+    --text-dark: #3D3D3D;
+    --text-medium: #5A5A5A;
+    --text-light: #8A8A7A;
+
+    /* Door Colors */
+    --door-wood: #8B6914;
+    --door-wood-dark: #6B5210;
+    --door-wood-light: #A67C00;
+    --door-frame: #5C4A1F;
+    --door-shadow: rgba(60, 50, 30, 0.4);
+}
+
+body {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    background-color: var(--cream);
+    min-height: 100vh;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Subtle Leaf Pattern Background */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='%235C6B4A' fill-opacity='0.03'%3E%3Cpath d='M40 10c-5 8-15 12-15 25s10 17 15 25c5-8 15-12 15-25S45 18 40 10z'/%3E%3Cpath d='M10 40c8 5 12 15 25 15s17-10 25-15c-8-5-12-15-25-15S18 35 10 40z'/%3E%3C/g%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* ================================
+   Main Layout
+   ================================ */
+
+.door-main {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 40px;
+    text-align: center;
+}
+
+.door-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 48px;
+    font-weight: 700;
+    color: var(--olive);
+    letter-spacing: 4px;
+    margin-bottom: 12px;
+}
+
+.door-subtitle {
+    font-size: 20px;
+    color: var(--text-medium);
+    font-style: italic;
+    margin-bottom: 50px;
+    letter-spacing: 1px;
+}
+
+.door-hint {
+    font-size: 16px;
+    color: var(--text-light);
+    margin-top: 30px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 1; }
+}
+
+/* ================================
+   Door Container
+   ================================ */
+
+.door-container {
+    perspective: 1000px;
+    cursor: pointer;
+}
+
+.door-frame {
+    position: relative;
+    width: 200px;
+    height: 340px;
+    background: var(--door-frame);
+    border-radius: 8px 8px 0 0;
+    padding: 12px;
+    box-shadow:
+        0 10px 40px var(--door-shadow),
+        inset 0 2px 4px rgba(255, 255, 255, 0.1);
+}
+
+/* ================================
+   The Door
+   ================================ */
+
+.door {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        135deg,
+        var(--door-wood-light) 0%,
+        var(--door-wood) 50%,
+        var(--door-wood-dark) 100%
+    );
+    border-radius: 4px 4px 0 0;
+    transform-origin: left center;
+    transform-style: preserve-3d;
+    transition: transform 0.4s ease;
+    box-shadow:
+        inset 2px 0 8px rgba(0, 0, 0, 0.2),
+        inset -2px 0 8px rgba(255, 255, 255, 0.1);
+}
+
+/* Wood grain texture */
+.door::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 3px,
+        rgba(0, 0, 0, 0.03) 3px,
+        rgba(0, 0, 0, 0.03) 6px
+    );
+    border-radius: 4px 4px 0 0;
+    pointer-events: none;
+}
+
+/* ================================
+   Door Panels
+   ================================ */
+
+.door-panel {
+    position: absolute;
+    background: linear-gradient(
+        145deg,
+        var(--door-wood-dark) 0%,
+        var(--door-wood) 100%
+    );
+    border: 2px solid var(--door-wood-dark);
+    border-radius: 3px;
+    box-shadow:
+        inset 1px 1px 3px rgba(255, 255, 255, 0.15),
+        inset -1px -1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.door-panel-top-left {
+    top: 20px;
+    left: 15px;
+    width: 65px;
+    height: 90px;
+}
+
+.door-panel-top-right {
+    top: 20px;
+    right: 15px;
+    width: 65px;
+    height: 90px;
+}
+
+.door-panel-bottom-left {
+    bottom: 20px;
+    left: 15px;
+    width: 65px;
+    height: 120px;
+}
+
+.door-panel-bottom-right {
+    bottom: 20px;
+    right: 15px;
+    width: 65px;
+    height: 120px;
+}
+
+/* ================================
+   Door Handle
+   ================================ */
+
+.door-handle {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 12px;
+    height: 35px;
+    background: linear-gradient(
+        90deg,
+        #C9A227 0%,
+        #E5C158 50%,
+        #C9A227 100%
+    );
+    border-radius: 3px;
+    box-shadow:
+        2px 2px 6px rgba(0, 0, 0, 0.3),
+        inset 1px 1px 2px rgba(255, 255, 255, 0.4);
+}
+
+.door-handle::after {
+    content: '';
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 6px;
+    height: 6px;
+    background: #8B7014;
+    border-radius: 50%;
+}
+
+/* ================================
+   Door Crack (Light through gap)
+   ================================ */
+
+.door-crack {
+    position: absolute;
+    left: -3px;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: linear-gradient(
+        to bottom,
+        transparent 0%,
+        rgba(255, 248, 220, 0) 10%,
+        rgba(255, 248, 220, 0) 90%,
+        transparent 100%
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+/* Light behind door */
+.door-light {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    right: 12px;
+    bottom: 0;
+    background: linear-gradient(
+        135deg,
+        #FFF8DC 0%,
+        #FFE4B5 50%,
+        #FFEFD5 100%
+    );
+    border-radius: 4px 4px 0 0;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+/* ================================
+   Hover State - Door Cracks Slightly
+   ================================ */
+
+.door-container:hover .door {
+    transform: rotateY(-8deg);
+}
+
+.door-container:hover .door-crack {
+    opacity: 1;
+    background: linear-gradient(
+        to bottom,
+        transparent 0%,
+        rgba(255, 248, 220, 0.8) 10%,
+        rgba(255, 248, 220, 0.9) 50%,
+        rgba(255, 248, 220, 0.8) 90%,
+        transparent 100%
+    );
+}
+
+.door-container:hover .door-light {
+    opacity: 0.3;
+}
+
+/* ================================
+   Click State - Door Opens Fully
+   ================================ */
+
+.door-opening .door {
+    transform: rotateY(-85deg);
+    transition: transform 1s ease-in-out;
+}
+
+.door-opening .door-crack {
+    opacity: 0;
+}
+
+.door-opening .door-light {
+    opacity: 1;
+    transition: opacity 0.5s ease 0.3s;
+}
+
+/* Fade out everything when opening */
+.door-opening {
+    animation: fadeToLight 1.2s ease-in-out forwards;
+}
+
+@keyframes fadeToLight {
+    0% {
+        opacity: 1;
+    }
+    70% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        background: #FFF8DC;
+    }
+}
+
+/* ================================
+   Responsive Design
+   ================================ */
+
+@media (max-width: 480px) {
+    .door-title {
+        font-size: 36px;
+    }
+
+    .door-subtitle {
+        font-size: 16px;
+    }
+
+    .door-frame {
+        width: 160px;
+        height: 280px;
+        padding: 10px;
+    }
+
+    .door-panel-top-left,
+    .door-panel-top-right {
+        width: 50px;
+        height: 70px;
+        top: 15px;
+    }
+
+    .door-panel-bottom-left,
+    .door-panel-bottom-right {
+        width: 50px;
+        height: 95px;
+        bottom: 15px;
+    }
+
+    .door-panel-top-left,
+    .door-panel-bottom-left {
+        left: 12px;
+    }
+
+    .door-panel-top-right,
+    .door-panel-bottom-right {
+        right: 12px;
+    }
+}

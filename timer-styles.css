@@ -1,0 +1,293 @@
+/* ================================
+   Timer Page Styles - Vintage Theme
+   ================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* Vintage Color Palette */
+    --cream: #F5F1E8;
+    --cream-dark: #EDE8DC;
+    --olive: #5C6B4A;
+    --olive-dark: #4A5A3A;
+    --olive-light: #7A8B68;
+    --text-dark: #3D3D3D;
+    --text-medium: #5A5A5A;
+    --text-light: #8A8A7A;
+    --shadow-soft: rgba(60, 60, 50, 0.1);
+}
+
+body {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    background-color: var(--cream);
+    min-height: 100vh;
+    position: relative;
+}
+
+/* Subtle Leaf Pattern Background */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='%235C6B4A' fill-opacity='0.025'%3E%3Cpath d='M40 10c-5 8-15 12-15 25s10 17 15 25c5-8 15-12 15-25S45 18 40 10z'/%3E%3Cpath d='M10 40c8 5 12 15 25 15s17-10 25-15c-8-5-12-15-25-15S18 35 10 40z'/%3E%3C/g%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* ================================
+   Header
+   ================================ */
+
+.timer-header {
+    background-color: var(--olive);
+    padding: 30px 20px;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 2px 12px var(--shadow-soft);
+}
+
+.timer-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--cream);
+    letter-spacing: 3px;
+}
+
+.timer-title .wink {
+    display: inline-block;
+    animation: wink 3s ease-in-out infinite;
+}
+
+@keyframes wink {
+    0%, 90%, 100% { opacity: 1; }
+    95% { opacity: 0; }
+}
+
+/* ================================
+   Main Content
+   ================================ */
+
+.timer-main {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(100vh - 120px);
+    padding: 40px 20px;
+}
+
+.timer-container {
+    background-color: var(--cream-dark);
+    border: 2px solid var(--olive);
+    border-radius: 16px;
+    padding: 50px 60px;
+    box-shadow:
+        0 10px 40px var(--shadow-soft),
+        inset 0 1px 0 rgba(255, 255, 255, 0.5);
+    text-align: center;
+}
+
+/* ================================
+   Timer Display
+   ================================ */
+
+.timer-display {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 40px;
+}
+
+.timer-hours,
+.timer-minutes,
+.timer-seconds {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 80px;
+    font-weight: 600;
+    color: var(--olive);
+    min-width: 100px;
+    text-align: center;
+    line-height: 1;
+}
+
+.timer-separator {
+    font-size: 60px;
+    font-weight: 600;
+    color: var(--olive-light);
+    animation: blink 1s ease-in-out infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
+/* ================================
+   Timer Controls
+   ================================ */
+
+.timer-controls {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn-timer {
+    padding: 14px 32px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border: 2px solid var(--olive);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-start {
+    background-color: var(--olive);
+    color: var(--cream);
+}
+
+.btn-start:hover:not(:disabled) {
+    background-color: var(--olive-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(92, 107, 74, 0.3);
+}
+
+.btn-pause {
+    background-color: var(--cream);
+    color: var(--olive);
+}
+
+.btn-pause:hover:not(:disabled) {
+    background-color: var(--olive-light);
+    color: var(--cream);
+}
+
+.btn-reset {
+    background-color: transparent;
+    color: var(--text-medium);
+    border-color: var(--text-light);
+}
+
+.btn-reset:hover {
+    background-color: var(--cream);
+    border-color: var(--olive);
+    color: var(--olive);
+}
+
+.btn-timer:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* ================================
+   Navigation to App
+   ================================ */
+
+.timer-nav {
+    margin-top: 50px;
+}
+
+.btn-enter-app {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 18px 36px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--cream);
+    background-color: var(--olive);
+    border: 2px solid var(--olive-dark);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 16px rgba(92, 107, 74, 0.3);
+}
+
+.btn-enter-app:hover {
+    background-color: var(--olive-dark);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(92, 107, 74, 0.4);
+}
+
+.btn-enter-app .arrow {
+    font-size: 24px;
+    transition: transform 0.3s ease;
+}
+
+.btn-enter-app:hover .arrow {
+    transform: translateX(5px);
+}
+
+/* ================================
+   Responsive Design
+   ================================ */
+
+@media (max-width: 600px) {
+    .timer-title {
+        font-size: 24px;
+        letter-spacing: 1px;
+    }
+
+    .timer-container {
+        padding: 30px 25px;
+    }
+
+    .timer-hours,
+    .timer-minutes,
+    .timer-seconds {
+        font-size: 48px;
+        min-width: 60px;
+    }
+
+    .timer-separator {
+        font-size: 36px;
+    }
+
+    .timer-controls {
+        gap: 10px;
+    }
+
+    .btn-timer {
+        padding: 12px 20px;
+        font-size: 14px;
+    }
+
+    .btn-enter-app {
+        padding: 14px 24px;
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 400px) {
+    .timer-hours,
+    .timer-minutes,
+    .timer-seconds {
+        font-size: 36px;
+        min-width: 45px;
+    }
+
+    .timer-separator {
+        font-size: 28px;
+    }
+}

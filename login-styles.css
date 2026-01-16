@@ -1,0 +1,337 @@
+/* ================================
+   Login Page Styles - Vintage Theme
+   ================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* Vintage Color Palette */
+    --cream: #F5F1E8;
+    --cream-dark: #EDE8DC;
+    --olive: #5C6B4A;
+    --olive-dark: #4A5A3A;
+    --olive-light: #7A8B68;
+    --text-dark: #3D3D3D;
+    --text-medium: #5A5A5A;
+    --text-light: #8A8A7A;
+    --border-subtle: rgba(92, 107, 74, 0.2);
+    --shadow-soft: rgba(60, 60, 50, 0.1);
+}
+
+body {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    background-color: var(--cream);
+    min-height: 100vh;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Subtle Leaf Pattern Background */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='%235C6B4A' fill-opacity='0.03'%3E%3Cpath d='M40 10c-5 8-15 12-15 25s10 17 15 25c5-8 15-12 15-25S45 18 40 10z'/%3E%3Cpath d='M10 40c8 5 12 15 25 15s17-10 25-15c-8-5-12-15-25-15S18 35 10 40z'/%3E%3C/g%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* ================================
+   Floating Image Columns
+   ================================ */
+
+.floating-column {
+    position: fixed;
+    top: 0;
+    width: 200px;
+    height: 100vh;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.floating-column-left {
+    left: 40px;
+}
+
+.floating-column-right {
+    right: 40px;
+}
+
+.floating-images {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.floating-image {
+    width: 180px;
+    height: 240px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 24px var(--shadow-soft);
+    border: 3px solid var(--border-subtle);
+    flex-shrink: 0;
+}
+
+.floating-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: sepia(15%) saturate(90%);
+    transition: filter 0.3s ease;
+}
+
+.floating-image:hover img {
+    filter: sepia(0%) saturate(100%);
+}
+
+/* Floating Down Animation (Left Column) */
+.floating-down {
+    animation: floatDown 40s linear infinite;
+}
+
+@keyframes floatDown {
+    0% {
+        transform: translateY(-50%);
+    }
+    100% {
+        transform: translateY(0%);
+    }
+}
+
+/* Floating Up Animation (Right Column) */
+.floating-up {
+    animation: floatUp 40s linear infinite;
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(0%);
+    }
+    100% {
+        transform: translateY(-50%);
+    }
+}
+
+/* ================================
+   Login Container
+   ================================ */
+
+.login-main {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 40px;
+}
+
+.login-container {
+    background-color: var(--cream);
+    background-image: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.5) 0%,
+        rgba(255, 255, 255, 0.2) 100%
+    );
+    border: 2px solid var(--olive);
+    border-radius: 16px;
+    padding: 60px 50px;
+    width: 100%;
+    max-width: 420px;
+    box-shadow:
+        0 20px 60px rgba(60, 60, 50, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.5);
+    text-align: center;
+}
+
+/* ================================
+   Logo
+   ================================ */
+
+.logo-container {
+    margin-bottom: 40px;
+}
+
+.logo {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 72px;
+    font-weight: 700;
+    color: var(--olive);
+    letter-spacing: 8px;
+    text-shadow: 2px 2px 0px var(--cream-dark);
+    line-height: 1;
+    margin-bottom: 12px;
+}
+
+.logo-tagline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--text-medium);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+}
+
+/* ================================
+   Login Form
+   ================================ */
+
+.login-form {
+    margin-bottom: 30px;
+}
+
+.form-group {
+    margin-bottom: 24px;
+    text-align: left;
+}
+
+.form-label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--olive);
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.form-input {
+    width: 100%;
+    padding: 16px 20px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    color: var(--text-dark);
+    background-color: var(--cream-dark);
+    border: 1px solid var(--border-subtle);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: var(--olive);
+    box-shadow: 0 0 0 3px rgba(92, 107, 74, 0.15);
+    background-color: #fff;
+}
+
+.form-input::placeholder {
+    color: var(--text-light);
+    font-style: italic;
+}
+
+/* ================================
+   Login Button
+   ================================ */
+
+.btn-login {
+    width: 100%;
+    padding: 18px 32px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--cream);
+    background-color: var(--olive);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(92, 107, 74, 0.3);
+}
+
+.btn-login:hover {
+    background-color: var(--olive-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(92, 107, 74, 0.4);
+}
+
+.btn-login:active {
+    transform: translateY(0);
+}
+
+/* ================================
+   Footer Text
+   ================================ */
+
+.login-footer {
+    font-size: 16px;
+    font-style: italic;
+    color: var(--text-light);
+    letter-spacing: 1px;
+}
+
+/* ================================
+   Responsive Design
+   ================================ */
+
+@media (max-width: 1200px) {
+    .floating-column-left {
+        left: 20px;
+    }
+    .floating-column-right {
+        right: 20px;
+    }
+    .floating-image {
+        width: 150px;
+        height: 200px;
+    }
+}
+
+@media (max-width: 900px) {
+    .floating-column {
+        width: 120px;
+    }
+    .floating-image {
+        width: 100px;
+        height: 140px;
+    }
+    .floating-column-left {
+        left: 10px;
+    }
+    .floating-column-right {
+        right: 10px;
+    }
+}
+
+@media (max-width: 700px) {
+    .floating-column {
+        display: none;
+    }
+
+    .login-container {
+        padding: 40px 30px;
+    }
+
+    .logo {
+        font-size: 56px;
+    }
+}
+
+@media (max-width: 480px) {
+    .login-main {
+        padding: 20px;
+    }
+
+    .login-container {
+        padding: 30px 24px;
+    }
+
+    .logo {
+        font-size: 48px;
+        letter-spacing: 4px;
+    }
+
+    .logo-tagline {
+        font-size: 14px;
+        letter-spacing: 2px;
+    }
+}

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="True Freelance - Login to track your freelance projects">
+    <title>True Freelance - Login</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Cormorant+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="login-styles.css">
+</head>
+<body>
+    <!-- Left Floating Images Column -->
+    <div class="floating-column floating-column-left">
+        <div class="floating-images floating-down">
+            <!-- First set -->
+            <div class="floating-image">
+                <img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Photographer at work">
+            </div>
+            <div class="floating-image">
+                <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Roofer at work">
+            </div>
+            <div class="floating-image">
+                <img src="https://images.unsplash.com/photo-1452860606245-08befc0ff44b?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Woodworker making desk">
+            </div>
+            <div class="floating-image">
+                <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Teacher giving lecture">
+            </div>
+            <!-- Duplicate set for seamless loop -->
+            <div class="floating-image">
+                <img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Photographer at work">
+            </div>
+            <div class="floating-image">
+                <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Roofer at work">
+            </div>
+            <div class="floating-image">
+                <img src="https://images.unsplash.com/photo-1452860606245-08befc0ff44b?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Woodworker making desk">
+            </div>
+            <div class="floating-image">
+                <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Teacher giving lecture">
+            </div>
+        </div>
+    </div>
+
+    <!-- Right Floating Images Column -->
+    <div class="floating-column floating-column-right">
+        <div class="floating-images floating-up">
+            <!-- First set -->
+            <div class="floating-image">
+                <img src="https://images.unsplash.com/photo-1475721027785-f74eccf877e2?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Public speaker">
+            </div>
+            <div class="floating-image">
+                <img src="https://images.unsplash.com/photo-1507838153414-b4b713384a76?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Musician writing music">
+            </div>
+            <div class="floating-image">
+                <img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Fitness coach at gym">
+            </div>
+            <div class="floating-image">
+                <img src="https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Artist painting">
+            </div>
+            <!-- Duplicate set for seamless loop -->
+            <div class="floating-image">
+                <img src="https://images.unsplash.com/photo-1475721027785-f74eccf877e2?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Public speaker">
+            </div>
+            <div class="floating-image">
+                <img src="https://images.unsplash.com/photo-1507838153414-b4b713384a76?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Musician writing music">
+            </div>
+            <div class="floating-image">
+                <img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Fitness coach at gym">
+            </div>
+            <div class="floating-image">
+                <img src="https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Artist painting">
+            </div>
+        </div>
+    </div>
+
+    <!-- Center Login Content -->
+    <main class="login-main">
+        <div class="login-container">
+            <!-- Logo -->
+            <div class="logo-container">
+                <h1 class="logo">TR</h1>
+                <p class="logo-tagline">True Freelance</p>
+            </div>
+
+            <!-- Login Form -->
+            <form class="login-form" id="loginForm">
+                <div class="form-group">
+                    <label for="username" class="form-label">Username</label>
+                    <input
+                        type="text"
+                        id="username"
+                        class="form-input"
+                        placeholder="Enter your username"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="password" class="form-label">Password</label>
+                    <input
+                        type="password"
+                        id="password"
+                        class="form-input"
+                        placeholder="Enter your password"
+                        required
+                    >
+                </div>
+
+                <button type="submit" class="btn-login">Enter</button>
+            </form>
+
+            <p class="login-footer">Track your worth. Know your rate.</p>
+        </div>
+    </main>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            // Visual entry only - redirect to door page
+            window.location.href = 'door.html';
+        });
+    </script>
+</body>
+</html>
