@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="TrueRate - Know exactly what your time is worth. Track your hourly rate per project, after time and taxes.">
+    <title>TrueRate - Know What Your Time Is Worth</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Grain Overlay -->
+    <div class="grain"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="#" class="logo">
+                <span class="logo-mark">TR</span>
+                <span class="logo-dot"></span>
+            </a>
+            <div class="nav-links">
+                <a href="#features">Features</a>
+                <a href="#problem">Problem</a>
+                <a href="#cta" class="btn btn-nav">Start Free</a>
+            </div>
+            <button class="nav-toggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="container hero-container">
+            <div class="hero-badge">
+                <span class="badge-dot"></span>
+                For freelancers who want clarity
+            </div>
+            <h1 class="hero-title">
+                <span class="title-line">Know what your</span>
+                <span class="title-line">time is <em>actually</em></span>
+                <span class="title-line">worth.</span>
+            </h1>
+            <p class="hero-subtitle">Stop guessing. Start knowing your true hourly rate—per project, after taxes, no illusions.</p>
+
+            <div class="hero-rate-display">
+                <div class="rate-label">Your True Rate</div>
+                <div class="rate-value">
+                    <span class="rate-currency">$</span>
+                    <span class="rate-number" data-value="67.50">67.50</span>
+                    <span class="rate-unit">/hr</span>
+                </div>
+                <div class="rate-details">
+                    <div class="rate-detail">
+                        <span class="detail-label">Revenue</span>
+                        <span class="detail-value">$2,700</span>
+                    </div>
+                    <div class="rate-divider"></div>
+                    <div class="rate-detail">
+                        <span class="detail-label">Hours</span>
+                        <span class="detail-value">40h</span>
+                    </div>
+                    <div class="rate-divider"></div>
+                    <div class="rate-detail">
+                        <span class="detail-label">After Tax</span>
+                        <span class="detail-value highlight">$2,025</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-cta">
+                <a href="#cta" class="btn btn-primary">
+                    Start Tracking Free
+                    <svg class="btn-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </a>
+                <a href="#features" class="btn btn-ghost">See How It Works</a>
+            </div>
+        </div>
+
+        <div class="hero-scroll-indicator">
+            <span>Scroll</span>
+            <div class="scroll-line"></div>
+        </div>
+    </header>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <div class="section-label">
+                <span class="label-number">01</span>
+                <span class="label-text">Features</span>
+            </div>
+            <h2 class="section-title">Everything you need.<br><span class="title-accent">Nothing you don't.</span></h2>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-number">01</div>
+                    <div class="feature-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <polyline points="12 6 12 12 16 14"></polyline>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">Time Tracking</h3>
+                    <p class="feature-description">Log hours effortlessly. See exactly where your time goes and what it earns.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-number">02</div>
+                    <div class="feature-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <line x1="12" y1="1" x2="12" y2="23"></line>
+                            <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">Real Hourly Rate</h3>
+                    <p class="feature-description">Calculate your true rate per project. No more flat fees hiding reality.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-number">03</div>
+                    <div class="feature-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <line x1="18" y1="20" x2="18" y2="10"></line>
+                            <line x1="12" y1="20" x2="12" y2="4"></line>
+                            <line x1="6" y1="20" x2="6" y2="14"></line>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">Project Analytics</h3>
+                    <p class="feature-description">Compare projects side by side. Find your most profitable work.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-number">04</div>
+                    <div class="feature-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                            <line x1="16" y1="2" x2="16" y2="6"></line>
+                            <line x1="8" y1="2" x2="8" y2="6"></line>
+                            <line x1="3" y1="10" x2="21" y2="10"></line>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">Monthly Reports</h3>
+                    <p class="feature-description">Track earnings over time. Understand your business better.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section id="problem" class="problem">
+        <div class="container">
+            <div class="problem-layout">
+                <div class="problem-content">
+                    <div class="section-label">
+                        <span class="label-number">02</span>
+                        <span class="label-text">The Problem</span>
+                    </div>
+                    <h2 class="section-title">You're probably earning less than you think.</h2>
+
+                    <div class="problem-text">
+                        <p>Most freelancers quote flat rates without knowing what they actually earn per hour. They finish a $500 project feeling accomplished—until they realize it took 25 hours.</p>
+                        <p class="text-highlight">That's $20/hour.</p>
+                        <p>Others charge "$50/hour" but don't track revisions, emails, and scope creep. Their real rate? Often half of what they think.</p>
+                    </div>
+
+                    <blockquote class="problem-quote">
+                        TrueRate gives you clarity. Every project. Every hour. Your real rate—no guessing.
+                    </blockquote>
+
+                    <ul class="check-list">
+                        <li>
+                            <span class="check-mark">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                            </span>
+                            Know your true hourly rate for every project
+                        </li>
+                        <li>
+                            <span class="check-mark">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                            </span>
+                            Identify which clients are most profitable
+                        </li>
+                        <li>
+                            <span class="check-mark">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                            </span>
+                            Set better rates based on real data
+                        </li>
+                        <li>
+                            <span class="check-mark">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                            </span>
+                            Stop undercharging for your valuable time
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="problem-stats">
+                    <div class="stat-card">
+                        <div class="stat-value">73<span class="stat-percent">%</span></div>
+                        <div class="stat-description">of freelancers underestimate time spent on projects</div>
+                    </div>
+                    <div class="stat-card stat-card-accent">
+                        <div class="stat-value">2.5<span class="stat-x">x</span></div>
+                        <div class="stat-description">gap between quoted and actual hourly rates</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="cta" class="cta">
+        <div class="container cta-container">
+            <div class="cta-content">
+                <h2 class="cta-title">Ready to know<br>your true rate?</h2>
+                <p class="cta-subtitle">Join thousands of freelancers who've taken control of their earnings.</p>
+                <a href="#" class="btn btn-cta">
+                    Get Started Free
+                    <svg class="btn-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </a>
+                <p class="cta-note">No credit card required</p>
+            </div>
+            <div class="cta-decoration">
+                <div class="deco-circle deco-circle-1"></div>
+                <div class="deco-circle deco-circle-2"></div>
+                <div class="deco-line"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-container">
+            <div class="footer-brand">
+                <a href="#" class="logo">
+                    <span class="logo-mark">TR</span>
+                    <span class="logo-dot"></span>
+                </a>
+                <p class="footer-tagline">Know what your time is worth.</p>
+            </div>
+            <nav class="footer-nav">
+                <a href="#features">Features</a>
+                <a href="#problem">Problem</a>
+                <a href="#">Privacy</a>
+                <a href="#">Terms</a>
+            </nav>
+            <p class="footer-copyright">&copy; 2026 TrueRate</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile nav toggle
+        const navToggle = document.querySelector('.nav-toggle');
+        const navLinks = document.querySelector('.nav-links');
+
+        navToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            navToggle.classList.toggle('active');
+        });
+
+        // Animate rate counter on scroll
+        const rateNumber = document.querySelector('.rate-number');
+        let hasAnimated = false;
+
+        const animateCounter = () => {
+            if (hasAnimated) return;
+            hasAnimated = true;
+
+            const target = parseFloat(rateNumber.dataset.value);
+            const duration = 2000;
+            const start = performance.now();
+
+            const animate = (currentTime) => {
+                const elapsed = currentTime - start;
+                const progress = Math.min(elapsed / duration, 1);
+
+                // Easing function
+                const easeOutExpo = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+                const current = easeOutExpo * target;
+
+                rateNumber.textContent = current.toFixed(2);
+
+                if (progress < 1) {
+                    requestAnimationFrame(animate);
+                }
+            };
+
+            requestAnimationFrame(animate);
+        };
+
+        // Intersection Observer for rate animation
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounter();
+                }
+            });
+        }, { threshold: 0.5 });
+
+        observer.observe(document.querySelector('.hero-rate-display'));
+
+        // Staggered reveal animations
+        const revealElements = document.querySelectorAll('.feature-card, .stat-card, .check-list li');
+
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationDelay = `${index * 0.1}s`;
+                    entry.target.classList.add('revealed');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                    navLinks.classList.remove('active');
+                    navToggle.classList.remove('active');
+                }
+            });
+        });
+
+        // Navbar background on scroll
+        const navbar = document.querySelector('.navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+</html>
