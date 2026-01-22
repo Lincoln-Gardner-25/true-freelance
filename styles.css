@@ -710,6 +710,40 @@ body::before {
 }
 
 /* ================================
+   Bottom Navigation
+   ================================ */
+
+.bottom-nav {
+    margin-top: var(--spacing-2xl);
+    text-align: center;
+    padding-bottom: var(--spacing-2xl);
+}
+
+.btn-cream-bubble {
+    display: inline-block;
+    padding: 14px 32px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--primary);
+    background-color: var(--cream);
+    border: 2px solid var(--primary);
+    border-radius: 50px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(92, 107, 74, 0.15);
+}
+
+.btn-cream-bubble:hover {
+    background-color: var(--primary);
+    color: var(--cream);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(92, 107, 74, 0.25);
+}
+
+/* ================================
    Utility Classes
    ================================ */
 

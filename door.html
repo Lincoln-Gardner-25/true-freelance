@@ -11,6 +11,12 @@
     <link rel="stylesheet" href="door-styles.css">
 </head>
 <body>
+    <script>
+        // Auth check - redirect to login if not logged in
+        if (localStorage.getItem('trueFreelance_loggedIn') !== 'true') {
+            window.location.href = 'login.html';
+        }
+    </script>
     <!-- Subtle Leaf Background handled in CSS -->
 
     <main class="door-main">

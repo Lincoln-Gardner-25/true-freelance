@@ -11,6 +11,12 @@
     <link rel="stylesheet" href="timer-styles.css">
 </head>
 <body>
+    <script>
+        // Auth check - redirect to login if not logged in
+        if (localStorage.getItem('trueFreelance_loggedIn') !== 'true') {
+            window.location.href = 'login.html';
+        }
+    </script>
     <!-- Header -->
     <header class="timer-header">
         <h1 class="timer-title">You're on the clock <span class="wink">;)</span></h1>

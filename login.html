@@ -118,7 +118,9 @@
     <script>
         document.getElementById('loginForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            // Visual entry only - redirect to door page
+            // Set logged in flag
+            localStorage.setItem('trueFreelance_loggedIn', 'true');
+            // Redirect to door page
             window.location.href = 'door.html';
         });
     </script>

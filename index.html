@@ -11,6 +11,12 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <script>
+        // Auth check - redirect to login if not logged in
+        if (localStorage.getItem('trueFreelance_loggedIn') !== 'true') {
+            window.location.href = 'login.html';
+        }
+    </script>
     <!-- Header -->
     <header class="header">
         <div class="container">
@@ -98,6 +104,11 @@
                         <p class="empty-state-text">Projects you complete this month will appear here</p>
                     </div>
                 </div>
+            </div>
+
+            <!-- Bottom Navigation -->
+            <div class="bottom-nav">
+                <a href="timer.html" class="btn-cream-bubble">Timer</a>
             </div>
         </div>
     </main>
