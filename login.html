@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Cormorant+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="login-styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
     <!-- Left Floating Images Column -->
@@ -87,12 +88,12 @@
             <!-- Login Form -->
             <form class="login-form" id="loginForm">
                 <div class="form-group">
-                    <label for="username" class="form-label">Username</label>
+                    <label for="email" class="form-label">Email</label>
                     <input
-                        type="text"
-                        id="username"
+                        type="email"
+                        id="email"
                         class="form-input"
-                        placeholder="Enter your username"
+                        placeholder="Enter your email"
                         required
                     >
                 </div>
@@ -105,23 +106,100 @@
                         class="form-input"
                         placeholder="Enter your password"
                         required
+                        minlength="6"
                     >
                 </div>
 
-                <button type="submit" class="btn-login">Enter</button>
+                <div id="authError" class="auth-error" style="color: #c0392b; margin-bottom: 1rem; display: none;"></div>
+
+                <button type="submit" class="btn-login" id="submitBtn">Sign In</button>
             </form>
+
+            <div class="auth-toggle" style="text-align: center; margin-top: 1rem;">
+                <p id="toggleText" style="color: #666;">Don't have an account? <a href="#" id="toggleLink" style="color: #8b7355;">Sign Up</a></p>
+            </div>
 
             <p class="login-footer">Track your worth. Know your rate.</p>
         </div>
     </main>
 
+    <script src="supabase.js"></script>
     <script>
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
+        let isSignUp = false;
+        const form = document.getElementById('loginForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const toggleLink = document.getElementById('toggleLink');
+        const toggleText = document.getElementById('toggleText');
+        const authError = document.getElementById('authError');
+
+        // Check if already logged in
+        (async function() {
+            const { data: { session } } = await window.supabaseClient.auth.getSession();
+            if (session) {
+                window.location.href = 'door.html';
+            }
+        })();
+
+        toggleLink.addEventListener('click', function(e) {
             e.preventDefault();
-            // Set logged in flag
-            localStorage.setItem('trueFreelance_loggedIn', 'true');
-            // Redirect to door page
-            window.location.href = 'door.html';
+            isSignUp = !isSignUp;
+            if (isSignUp) {
+                submitBtn.textContent = 'Sign Up';
+                toggleText.innerHTML = 'Already have an account? <a href="#" id="toggleLink" style="color: #8b7355;">Sign In</a>';
+            } else {
+                submitBtn.textContent = 'Sign In';
+                toggleText.innerHTML = 'Don\'t have an account? <a href="#" id="toggleLink" style="color: #8b7355;">Sign Up</a>';
+            }
+            // Re-attach event listener to new link
+            document.getElementById('toggleLink').addEventListener('click', arguments.callee.bind(this));
+            authError.style.display = 'none';
+        });
+
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            authError.style.display = 'none';
+            submitBtn.disabled = true;
+            submitBtn.textContent = isSignUp ? 'Signing up...' : 'Signing in...';
+
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            try {
+                let result;
+                if (isSignUp) {
+                    result = await window.supabaseClient.auth.signUp({
+                        email: email,
+                        password: password
+                    });
+                } else {
+                    result = await window.supabaseClient.auth.signInWithPassword({
+                        email: email,
+                        password: password
+                    });
+                }
+
+                if (result.error) {
+                    throw result.error;
+                }
+
+                if (isSignUp && !result.data.session) {
+                    // Email confirmation required
+                    authError.style.color = '#27ae60';
+                    authError.textContent = 'Check your email to confirm your account!';
+                    authError.style.display = 'block';
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Sign Up';
+                } else {
+                    // Redirect on successful login
+                    window.location.href = 'door.html';
+                }
+            } catch (error) {
+                authError.style.color = '#c0392b';
+                authError.textContent = error.message;
+                authError.style.display = 'block';
+                submitBtn.disabled = false;
+                submitBtn.textContent = isSignUp ? 'Sign Up' : 'Sign In';
+            }
         });
     </script>
 </body>

@@ -1,6 +1,7 @@
 /**
  * True Freelance App
  * Track freelance projects and calculate hourly rates
+ * Powered by Supabase
  */
 
 const TrueFreelanceApp = (() => {
@@ -10,8 +11,7 @@ const TrueFreelanceApp = (() => {
 
     let projects = [];
     let editingProjectId = null;
-    let currentViewMonth = new Date(); // Track currently viewed month
-    const STORAGE_KEY = 'trueFreelance_projects';
+    let currentViewMonth = new Date();
 
     // ================================
     // DOM Elements
@@ -26,6 +26,7 @@ const TrueFreelanceApp = (() => {
         saveBtn: document.getElementById('saveBtn'),
         prevMonth: document.getElementById('prevMonth'),
         nextMonth: document.getElementById('nextMonth'),
+        logoutBtn: document.getElementById('logoutBtn'),
 
         // Containers
         emptyState: document.getElementById('emptyState'),
@@ -63,41 +64,31 @@ const TrueFreelanceApp = (() => {
     // ================================
 
     /**
-     * Load projects from localStorage
+     * Load projects from Supabase
      */
-    function loadProjects() {
+    async function loadProjects() {
         try {
-            const stored = localStorage.getItem(STORAGE_KEY);
-            if (stored) {
-                projects = JSON.parse(stored);
-            }
+            const { data, error } = await window.supabaseClient
+                .from('projects')
+                .select('*')
+                .order('created_at', { ascending: false });
+
+            if (error) throw error;
+
+            projects = data.map(p => ({
+                id: p.id,
+                name: p.name,
+                hoursWorked: parseFloat(p.hours_worked),
+                moneyReceived: parseFloat(p.money_received),
+                completionDate: p.completion_date,
+                hourlyRate: parseFloat(p.hourly_rate),
+                createdAt: p.created_at,
+                updatedAt: p.updated_at
+            }));
         } catch (error) {
             console.error('Error loading projects:', error);
             projects = [];
         }
-    }
-
-    /**
-     * Save projects to localStorage
-     */
-    function saveProjects() {
-        try {
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(projects));
-        } catch (error) {
-            console.error('Error saving projects:', error);
-            if (error.name === 'QuotaExceededError') {
-                alert('Storage limit reached. Please delete some projects.');
-            } else {
-                alert('Unable to save data. Please try again.');
-            }
-        }
-    }
-
-    /**
-     * Generate a unique ID for a project
-     */
-    function generateId() {
-        return `project_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
     }
 
     /**
@@ -122,62 +113,125 @@ const TrueFreelanceApp = (() => {
     /**
      * Add a new project
      */
-    function addProject(projectData) {
-        const now = new Date().toISOString();
-        const hourlyRate = calculateHourlyRate(projectData.hoursWorked, projectData.moneyReceived);
+    async function addProject(projectData) {
+        try {
+            const { data, error } = await window.supabaseClient
+                .from('projects')
+                .insert([{
+                    user_id: window.currentUser.id,
+                    name: projectData.name.trim(),
+                    hours_worked: parseFloat(projectData.hoursWorked),
+                    money_received: parseFloat(projectData.moneyReceived),
+                    completion_date: projectData.completionDate
+                }])
+                .select()
+                .single();
 
-        const newProject = {
-            id: generateId(),
-            name: projectData.name.trim(),
-            hoursWorked: parseFloat(projectData.hoursWorked),
-            moneyReceived: parseFloat(projectData.moneyReceived),
-            completionDate: projectData.completionDate,
-            hourlyRate: hourlyRate,
-            createdAt: now,
-            updatedAt: now
-        };
+            if (error) throw error;
 
-        projects.unshift(newProject); // Add to beginning of array
-        saveProjects();
-        return newProject;
+            const newProject = {
+                id: data.id,
+                name: data.name,
+                hoursWorked: parseFloat(data.hours_worked),
+                moneyReceived: parseFloat(data.money_received),
+                completionDate: data.completion_date,
+                hourlyRate: parseFloat(data.hourly_rate),
+                createdAt: data.created_at,
+                updatedAt: data.updated_at
+            };
+
+            projects.unshift(newProject);
+            return newProject;
+        } catch (error) {
+            console.error('Error adding project:', error);
+            alert('Failed to add project. Please try again.');
+            return null;
+        }
     }
 
     /**
      * Update an existing project
      */
-    function updateProject(id, projectData) {
-        const projectIndex = projects.findIndex(p => p.id === id);
-        if (projectIndex === -1) return null;
+    async function updateProject(id, projectData) {
+        try {
+            const { data, error } = await window.supabaseClient
+                .from('projects')
+                .update({
+                    name: projectData.name.trim(),
+                    hours_worked: parseFloat(projectData.hoursWorked),
+                    money_received: parseFloat(projectData.moneyReceived),
+                    completion_date: projectData.completionDate,
+                    updated_at: new Date().toISOString()
+                })
+                .eq('id', id)
+                .select()
+                .single();
 
-        const hourlyRate = calculateHourlyRate(projectData.hoursWorked, projectData.moneyReceived);
+            if (error) throw error;
 
-        projects[projectIndex] = {
-            ...projects[projectIndex],
-            name: projectData.name.trim(),
-            hoursWorked: parseFloat(projectData.hoursWorked),
-            moneyReceived: parseFloat(projectData.moneyReceived),
-            completionDate: projectData.completionDate,
-            hourlyRate: hourlyRate,
-            updatedAt: new Date().toISOString()
-        };
+            const projectIndex = projects.findIndex(p => p.id === id);
+            if (projectIndex !== -1) {
+                projects[projectIndex] = {
+                    id: data.id,
+                    name: data.name,
+                    hoursWorked: parseFloat(data.hours_worked),
+                    moneyReceived: parseFloat(data.money_received),
+                    completionDate: data.completion_date,
+                    hourlyRate: parseFloat(data.hourly_rate),
+                    createdAt: data.created_at,
+                    updatedAt: data.updated_at
+                };
+            }
 
-        saveProjects();
-        return projects[projectIndex];
+            return projects[projectIndex];
+        } catch (error) {
+            console.error('Error updating project:', error);
+            alert('Failed to update project. Please try again.');
+            return null;
+        }
     }
 
     /**
      * Delete a project
      */
-    function deleteProject(id) {
+    async function deleteProject(id) {
         const project = getProjectById(id);
         if (!project) return false;
 
         const confirmed = confirm(`Are you sure you want to delete "${project.name}"?`);
         if (!confirmed) return false;
 
-        projects = projects.filter(p => p.id !== id);
-        saveProjects();
-        return true;
+        try {
+            const { error } = await window.supabaseClient
+                .from('projects')
+                .delete()
+                .eq('id', id);
+
+            if (error) throw error;
+
+            projects = projects.filter(p => p.id !== id);
+            return true;
+        } catch (error) {
+            console.error('Error deleting project:', error);
+            alert('Failed to delete project. Please try again.');
+            return false;
+        }
+    }
+
+    // ================================
+    // Auth Functions
+    // ================================
+
+    /**
+     * Logout user
+     */
+    async function logout() {
+        try {
+            await window.supabaseClient.auth.signOut();
+            window.location.href = 'login.html';
+        } catch (error) {
+            console.error('Error logging out:', error);
+        }
     }
 
     // ================================
@@ -242,7 +296,6 @@ const TrueFreelanceApp = (() => {
      * Switch between tabs
      */
     function switchTab(tabName) {
-        // Update tab buttons
         document.querySelectorAll('.tab-btn').forEach(btn => {
             if (btn.dataset.tab === tabName) {
                 btn.classList.add('active');
@@ -251,7 +304,6 @@ const TrueFreelanceApp = (() => {
             }
         });
 
-        // Update tab content
         if (tabName === 'projects') {
             elements.projectsTab.classList.add('active');
             elements.monthlyTab.classList.remove('active');
@@ -271,16 +323,13 @@ const TrueFreelanceApp = (() => {
         const monthProjects = getProjectsForMonth(year, month);
         const stats = calculateMonthlyStats(monthProjects);
 
-        // Update month title
         elements.currentMonth.textContent = getMonthName(currentViewMonth);
 
-        // Update stats
         elements.monthlyEarnings.textContent = formatCurrency(stats.totalEarnings);
         elements.monthlyHours.textContent = formatHours(stats.totalHours);
         elements.monthlyRate.textContent = formatCurrency(stats.avgRate) + '/hr';
         elements.monthlyProjects.textContent = stats.projectCount;
 
-        // Render project list
         elements.monthlyProjectsList.innerHTML = '';
 
         if (monthProjects.length === 0) {
@@ -431,7 +480,6 @@ const TrueFreelanceApp = (() => {
     function openModal(mode = 'add', projectId = null) {
         editingProjectId = projectId;
 
-        // Reset form
         elements.projectForm.reset();
         clearErrors();
 
@@ -446,7 +494,6 @@ const TrueFreelanceApp = (() => {
             }
         } else {
             elements.modalTitle.textContent = 'Add Project';
-            // Set default date to today
             const today = new Date().toISOString().split('T')[0];
             elements.completionDate.value = today;
         }
@@ -454,7 +501,6 @@ const TrueFreelanceApp = (() => {
         elements.modalOverlay.classList.remove('hidden');
         elements.projectName.focus();
 
-        // Prevent body scroll when modal is open
         document.body.style.overflow = 'hidden';
     }
 
@@ -467,7 +513,6 @@ const TrueFreelanceApp = (() => {
         clearErrors();
         editingProjectId = null;
 
-        // Restore body scroll
         document.body.style.overflow = '';
     }
 
@@ -493,28 +538,24 @@ const TrueFreelanceApp = (() => {
         let isValid = true;
         clearErrors();
 
-        // Validate project name
         if (!data.name || data.name.trim().length === 0) {
             elements.nameError.textContent = 'Project name is required';
             elements.projectName.classList.add('error');
             isValid = false;
         }
 
-        // Validate hours
         if (!data.hoursWorked || parseFloat(data.hoursWorked) < 0) {
             elements.hoursError.textContent = 'Hours must be 0 or greater';
             elements.hoursWorked.classList.add('error');
             isValid = false;
         }
 
-        // Validate money
         if (!data.moneyReceived || parseFloat(data.moneyReceived) < 0) {
             elements.moneyError.textContent = 'Money must be 0 or greater';
             elements.moneyReceived.classList.add('error');
             isValid = false;
         }
 
-        // Validate date
         if (!data.completionDate) {
             elements.dateError.textContent = 'Completion date is required';
             elements.completionDate.classList.add('error');
@@ -531,7 +572,7 @@ const TrueFreelanceApp = (() => {
     /**
      * Handle form submission
      */
-    function handleFormSubmit(event) {
+    async function handleFormSubmit(event) {
         event.preventDefault();
 
         const formData = {
@@ -545,27 +586,34 @@ const TrueFreelanceApp = (() => {
             return;
         }
 
+        // Disable save button during operation
+        elements.saveBtn.disabled = true;
+        elements.saveBtn.textContent = 'Saving...';
+
+        let success;
         if (editingProjectId) {
-            // Update existing project
-            updateProject(editingProjectId, formData);
+            success = await updateProject(editingProjectId, formData);
         } else {
-            // Add new project
-            addProject(formData);
+            success = await addProject(formData);
         }
 
-        closeModal();
-        renderProjects();
+        elements.saveBtn.disabled = false;
+        elements.saveBtn.textContent = 'Save Project';
 
-        // Update monthly view if it's active
-        if (!elements.monthlyTab.classList.contains('hidden')) {
-            renderMonthlyView();
+        if (success) {
+            closeModal();
+            renderProjects();
+
+            if (!elements.monthlyTab.classList.contains('hidden')) {
+                renderMonthlyView();
+            }
         }
     }
 
     /**
      * Handle card action clicks (Edit/Delete)
      */
-    function handleCardAction(event) {
+    async function handleCardAction(event) {
         const button = event.target.closest('[data-action]');
         if (!button) return;
 
@@ -575,7 +623,7 @@ const TrueFreelanceApp = (() => {
         if (action === 'edit') {
             openModal('edit', projectId);
         } else if (action === 'delete') {
-            if (deleteProject(projectId)) {
+            if (await deleteProject(projectId)) {
                 renderProjects();
             }
         }
@@ -604,31 +652,29 @@ const TrueFreelanceApp = (() => {
     // ================================
 
     function setupEventListeners() {
-        // Add project buttons
         elements.addProjectBtn.addEventListener('click', () => openModal('add'));
         elements.emptyStateBtn.addEventListener('click', () => openModal('add'));
 
-        // Modal controls
         elements.closeModalBtn.addEventListener('click', closeModal);
         elements.cancelBtn.addEventListener('click', closeModal);
         elements.modalOverlay.addEventListener('click', handleOverlayClick);
 
-        // Form submission
         elements.projectForm.addEventListener('submit', handleFormSubmit);
 
-        // Project card actions (using event delegation)
         elements.projectsList.addEventListener('click', handleCardAction);
 
-        // Tab switching
         document.querySelectorAll('.tab-btn').forEach(btn => {
             btn.addEventListener('click', () => switchTab(btn.dataset.tab));
         });
 
-        // Month navigation
         elements.prevMonth.addEventListener('click', () => changeMonth(-1));
         elements.nextMonth.addEventListener('click', () => changeMonth(1));
 
-        // Keyboard shortcuts
+        // Logout button
+        if (elements.logoutBtn) {
+            elements.logoutBtn.addEventListener('click', logout);
+        }
+
         document.addEventListener('keydown', handleEscapeKey);
     }
 
@@ -639,11 +685,11 @@ const TrueFreelanceApp = (() => {
     /**
      * Initialize the application
      */
-    function init() {
-        loadProjects();
+    async function init() {
+        await loadProjects();
         renderProjects();
         setupEventListeners();
-        console.log('True Freelance App initialized');
+        console.log('True Freelance App initialized with Supabase');
     }
 
     // ================================
@@ -652,7 +698,6 @@ const TrueFreelanceApp = (() => {
 
     return {
         init,
-        // Expose some methods for debugging/testing
         addProject,
         updateProject,
         deleteProject,

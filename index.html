@@ -9,14 +9,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
-    <script>
-        // Auth check - redirect to login if not logged in
-        if (localStorage.getItem('trueFreelance_loggedIn') !== 'true') {
-            window.location.href = 'login.html';
-        }
-    </script>
+    <script src="supabase.js"></script>
+    <script src="auth-guard.js"></script>
     <!-- Header -->
     <header class="header">
         <div class="container">
@@ -28,6 +25,7 @@
                     <span class="btn-icon">+</span>
                     Add Project
                 </button>
+                <button id="logoutBtn" class="btn btn-secondary">Logout</button>
             </div>
         </div>
     </header>

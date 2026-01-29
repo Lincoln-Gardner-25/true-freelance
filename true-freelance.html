@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>True Freelance - Lincoln Gardner</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #fff;
+        }
+
+        .navbar {
+            background: #fff;
+            border-bottom: 1px solid #e5e5e5;
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: #333;
+            text-decoration: none;
+        }
+
+        .navbar-nav {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .navbar-nav a {
+            color: #666;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .navbar-nav a:hover,
+        .navbar-nav a.active {
+            color: #333;
+        }
+
+        .main-content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        .breadcrumb {
+            margin-bottom: 1rem;
+            color: #666;
+        }
+
+        .breadcrumb a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        .page-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .project-meta {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .project-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #666;
+        }
+
+        .project-content {
+            font-size: 1.125rem;
+            color: #444;
+        }
+
+        .project-content p {
+            margin-bottom: 1.5rem;
+        }
+
+        .project-content h2 {
+            font-size: 1.5rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .project-content ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-content li {
+            margin-bottom: 0.5rem;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .btn-primary {
+            background: #333;
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            background: #555;
+        }
+
+        .btn-secondary {
+            background: #fff;
+            color: #333;
+            border: 1px solid #e5e5e5;
+        }
+
+        .btn-secondary:hover {
+            border-color: #333;
+        }
+
+        .project-image {
+            width: 100%;
+            border-radius: 8px;
+            border: 1px solid #e5e5e5;
+            margin: 2rem 0;
+        }
+
+        @media (max-width: 600px) {
+            .navbar-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .page-title {
+                font-size: 1.5rem;
+            }
+
+            .project-links {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="../index.html" class="navbar-brand">Lincoln Gardner</a>
+            <ul class="navbar-nav">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../about.html">About</a></li>
+                <li><a href="../projects.html" class="active">Projects</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <nav class="breadcrumb">
+            <a href="../projects.html">Projects</a> / True Freelance
+        </nav>
+
+        <h1 class="page-title">True Freelance</h1>
+
+        <div class="project-meta">
+            <span class="project-meta-item">
+                <strong>Role:</strong> Product Manager & Developer
+            </span>
+            <span class="project-meta-item">
+                <strong>Timeline:</strong> January 2026
+            </span>
+        </div>
+
+        <div class="project-content">
+            <p>
+                True Freelance is a web application designed to help freelancers understand their
+                true hourly rate by tracking the actual hours worked on projects alongside the
+                money received.
+            </p>
+
+            <h2>Problem Statement</h2>
+            <p>
+                Many freelancers underestimate the time they spend on projects, leading to an
+                inaccurate understanding of their actual hourly earnings. This can result in
+                underpricing services and burnout from overwork.
+            </p>
+
+            <h2>Solution</h2>
+            <p>
+                True Freelance provides a simple, elegant interface for tracking:
+            </p>
+            <ul>
+                <li>Project names and completion dates</li>
+                <li>Hours worked on each project</li>
+                <li>Money received for each project</li>
+                <li>Automatically calculated hourly rates</li>
+                <li>Monthly earnings summaries and statistics</li>
+            </ul>
+
+            <h2>Key Features</h2>
+            <ul>
+                <li><strong>Built-in Timer:</strong> Track time as you work with an integrated stopwatch</li>
+                <li><strong>Monthly View:</strong> See earnings, hours, and average rate by month</li>
+                <li><strong>Cloud Sync:</strong> Data synced across devices with Supabase</li>
+                <li><strong>User Authentication:</strong> Secure sign-up and login</li>
+                <li><strong>Responsive Design:</strong> Works on desktop and mobile</li>
+            </ul>
+
+            <h2>Technology Stack</h2>
+            <ul>
+                <li>HTML5, CSS3, Vanilla JavaScript</li>
+                <li>Supabase (Authentication & Database)</li>
+                <li>PostgreSQL with Row Level Security</li>
+            </ul>
+
+            <div class="project-links">
+                <a href="#" class="btn btn-primary">
+                    View Live App &rarr;
+                </a>
+                <a href="https://github.com/Lincoln-Gardner-25/portfolio" class="btn btn-secondary">
+                    View Source Code
+                </a>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
